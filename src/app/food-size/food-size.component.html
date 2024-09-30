@@ -1,12 +1,37 @@
 <div class="mt-3 card">
     <div class="card-header">ขนาด</div>
     <div class="card-body">
-        <button class="btn btn-primary" data-bs-target="#modalFoodSize" data-bs-toggle="modal">
+        <button class="btn btn-primary mb-2" data-bs-target="#modalFoodSize" data-bs-toggle="modal">
             <i class="fa fa-plus me-2"></i>เพิ่มรายการ
         </button>
-
-        <table class="table">
-
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ประเภทอาหาร</th>
+                    <th>ชื่อ</th>
+                    <th class="text-end">จ่ายเพิ่ม (บาท)</th>
+                    <th>หมายเหตุ</th>
+                    <th width="120px"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of foodSizes; track item) {
+                <tr>
+                    <td>{{ item.FoodType.name }}</td>
+                    <td>{{ item.name }}</td>
+                    <td class="text-end">{{ item.moneyAdded }}</td>
+                    <td>{{ item.remark }}</td>
+                    <td class="text-center">
+                        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalFoodType">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button (click)="remove(item)" class="btn btn-danger">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+            </tbody>
         </table>
     </div>
 </div>
@@ -27,7 +52,7 @@
     </div>
     <div class="mt-3">
         <div>คิดเงินเพิ่ม (บาท)</div>
-        <input [(ngModel)]="price" class="form-control">
+        <input [(ngModel)]="price" class="form-control" type="number">
     </div>
     <div class="mt-3">
         <div>หมายเหตุ</div>

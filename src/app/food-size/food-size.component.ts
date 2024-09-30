@@ -78,4 +78,30 @@ export class FoodSizeComponent {
     document.getElementById('modalFoodSize_btnClose')?.click();
   }
 
+  async remove(item: any) {
+    try {
+      const button = await Swal.fire({
+        title: 'ลบข้อมูล',
+        text: 'คุณต้องการลบข้อมูลใช่หรือไม่',
+        icon: 'warning',
+        showCancelButton: true,
+        showConfirmButton: true,
+      })
+
+      if (button.isConfirmed) {
+        this.http
+        .delete(config.apiServer + '/api/foodSize/remove/' + item.id)
+        .subscribe((res:any) => {
+          this.fetchData();
+        });    
+      }
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      })
+    }
+  }
+
 }
