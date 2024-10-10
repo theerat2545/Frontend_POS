@@ -21,8 +21,9 @@
                     <td>{{ item.name }}</td>
                     <td class="text-end">{{ item.moneyAdded }}</td>
                     <td>{{ item.remark }}</td>
+               
                     <td class="text-center">
-                        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalFoodType">
+                        <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalFoodSize" (click)="edit(item)">
                             <i class="fa fa-pencil"></i>
                         </button>
                         <button (click)="remove(item)" class="btn btn-danger">

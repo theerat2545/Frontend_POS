@@ -61,13 +61,15 @@ export class FoodSizeComponent {
       price: this.price,
       remark: this.remark,
       id: this.id,
-      foodTypeId: this.foodTypeId,
+      foodTypeId: parseInt(this.foodTypeId.toString()),
     };
 
     if (this.id > 0) {
       this.http
       .put(config.apiServer + '/api/foodSize/update', payload)
-      .subscribe((res: any) => {});
+      .subscribe((res: any) => {
+        this.fetchData();
+      });
     } else {
       this.http.post(config.apiServer + '/api/foodSize/create', payload)
       .subscribe((res: any) => {
@@ -102,6 +104,14 @@ export class FoodSizeComponent {
         icon: 'error'
       })
     }
+  }
+
+  edit(item: any) {
+    this.id = item.id;
+    this.name = item.name;
+    this.remark = item.remark;
+    this.foodTypeId = item.foodTypeId;
+    this.price = item.moneyAdded;
   }
 
 }
