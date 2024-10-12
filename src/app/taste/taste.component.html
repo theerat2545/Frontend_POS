@@ -4,13 +4,39 @@
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTaste">
         <i class="fa fa-plus me-2"></i>เพิ่มรายการ
       </button>
+
+      <table class="mt-3 table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>ประเภทอาหาร</th>
+            <th>รสชาติ</th>
+            <th>หมายเหตุ</th>
+            <th width="200px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of tastes; track $index) {
+          <tr>
+            <td>{{ item.FoodType.name }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.remark }}</td>
+            <td>
+              <button  class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalTaste">
+                <i class="fa fa-pencil"></i> แก้ไข
+              </button>
+              <button  class="btn btn-danger"><i class="fa fa-times"></i> ลบ</button>
+            </td>
+          </tr>
+        }
+        </tbody>
+      </table>
     </div>
   </div>
   
   <app-my-modal modalId="modalTaste" title="รสชาติ">
     <div>
       <div>ประเภทอาหาร</div>
-      <select class="form-control" [ngModel]="foodTypeId">
+      <select class="form-control" [(ngModel)]="foodTypeId">
         @for (item of foodTypes; track $index) {
             <option [value]="item.id">
                 {{ item.name }}
@@ -20,13 +46,13 @@
     </div>
     <div class="mt-3">
       <div>ชื่อ</div>
-      <input type="text" class="form-control">
+      <input [(ngModel)]="name" class="form-control">
     </div>
     <div class="mt-3">
       <div>หมายเหตุ</div>
-      <input type="text" class="form-control">
+      <input [(ngModel)]="remark" class="form-control">
     </div>
-    <button class="btn btn-primary mt-3">
+    <button (click)="save()" class="btn btn-primary mt-3">
       <i class="fa fa-check me-2"></i>บันทึก
     </button>
   </app-my-modal>

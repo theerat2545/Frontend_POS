@@ -33,6 +33,7 @@ export class TasteComponent {
         .get(config.apiServer + '/api/foodType/list')
         .subscribe((res: any) => {
           this.foodTypes = res.results;
+          this.foodTypeId = this.foodTypes[0].id;
         })
     } catch (e: any) {
       Swal.fire({
@@ -44,11 +45,53 @@ export class TasteComponent {
   }
 
   fetchData() {
-
+    try {
+      this.http
+      .get(config.apiServer + '/api/taste/list')
+      .subscribe((res: any) => {
+        this.tastes = res.results;
+      });
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      });
+    }
   }
 
   save() {
+    try {
+      const payload = {
+        id: this.id,
+        foodTypeId: parseInt(this.foodTypeId.toString()),
+        name: this.name,
+        remark: this.remark, 
+      };
 
+      if (this.id > 0) {
+        this.http
+        .put(config.apiServer + '/api/taste/update', payload)
+        .subscribe((res: any) => {
+          this.fetchData();
+          this.id = 0;
+        });
+      } else {
+        this.http
+        .post(config.apiServer + '/api/taste/create', payload)
+        .subscribe((res: any) => {
+          this.fetchData();
+        });
+      }
+
+      document.getElementById('modalTaste_btnClose')?.click();      
+    } catch (e: any) {
+      Swal.fire({
+        title: 'error',
+        text: e.message,
+        icon: 'error'
+      });
+    }
   }
 
   edit(item: any) {
