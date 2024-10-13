@@ -1,7 +1,7 @@
 <div class="card mt-3">
     <div class="card-header">รสชาติ</div>
     <div class="card-body">
-      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTaste">
+      <button (click)="clearForm()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTaste">
         <i class="fa fa-plus me-2"></i>เพิ่มรายการ
       </button>
 
@@ -20,11 +20,11 @@
             <td>{{ item.FoodType.name }}</td>
             <td>{{ item.name }}</td>
             <td>{{ item.remark }}</td>
-            <td>
-              <button  class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalTaste">
+            <td class="text-center">
+              <button (click)="edit(item)"  class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalTaste">
                 <i class="fa fa-pencil"></i> แก้ไข
               </button>
-              <button  class="btn btn-danger"><i class="fa fa-times"></i> ลบ</button>
+              <button (click)="remove(item)"  class="btn btn-danger"><i class="fa fa-times"></i> ลบ</button>
             </td>
           </tr>
         }

@@ -68,7 +68,7 @@ export class TasteComponent {
         name: this.name,
         remark: this.remark, 
       };
-
+      console.log(this.id);
       if (this.id > 0) {
         this.http
         .put(config.apiServer + '/api/taste/update', payload)
@@ -95,10 +95,43 @@ export class TasteComponent {
   }
 
   edit(item: any) {
-
+    this.foodTypeId = item.foodTypeId;
+    this.name = item.name;
+    this.id = item.id;
+    this.remark = item.remark;
   }
 
-  remove(item: any) {
+ async remove(item: any) {
+  try {
+    const button = await Swal.fire({
+      title: 'ลบข้อมูล',
+      text: 'คุณต้องการลบข้อมูล ใช่หรือไม่',
+      icon: 'warning',
+      showCancelButton: true,
+      showConfirmButton: true,
+    });
 
+    if (button.isConfirmed) {
+      this.http
+      .delete((config.apiServer + '/api/taste/remove/' + item.id))
+      .subscribe((res: any) => {
+        this.fetchData();
+      });
+    }
+  } catch (e: any) {
+    Swal.fire({
+      title: 'error',
+      text: e.message,
+      icon: 'error'
+    });
+  }
+  }
+
+  clearForm() {
+    this.id = 0;
+    this.name = "";
+    this.remark = "";
   }
 }
+
+ 
