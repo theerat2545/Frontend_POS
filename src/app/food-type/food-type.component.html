@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header bg-primary">ประเภทอาหาร</div>
+    <div class="card-header bg-navy">ประเภทอาหาร</div>
     <div class="card-body">
        <button (click)="clearform()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalFoodType">
         <i class="fa fa-plus me-2"></i>เพิ่มประเภท
@@ -7,6 +7,7 @@
         <table class="mt-3 table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th width="50px" class="text-center">#</th>
                     <th>ชื่อประเภท</th>
                     <th>หมายเหตุ</th>
                     <th width="120px"></th>
@@ -15,6 +16,7 @@
             <tbody>
                 @for (item of foodTypes; track item) {
                 <tr>
+                    <td class="text-center" >{{ $index + 1 }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.remark }}</td>
                     <td class="text-center">

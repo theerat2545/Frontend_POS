@@ -1,5 +1,5 @@
 <div class="card mt-3">
-    <div class="card-header">อาหาร/เครื่องดื่ม</div>
+    <div class="card-header bg-navy">อาหาร/เครื่องดื่ม</div>
     <div class="card-body">
         <button (click)="clearForm()" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalFood" >
             <i class="fa fa-plus me-2"></i>เพิ่มรายการ
@@ -20,18 +20,20 @@
         <table class="mt-3 table table-bordered table-striped">
             <thead>
               <tr>
+                <th class="text-center" width="50px">#</th>
                 <th width="100px">รูปภาพ</th>
                 <th>ประเภทอาหาร</th>
                 <th>หมวด</th>
                 <th>รายการ</th>
                 <th>หมายเหตุ</th>
                 <th class="text-end">ราคา</th>
-                <th width="200px"></th>
+                <th width="120px"></th>
               </tr>
             </thead>
             <tbody>
               @for (item of foods; track $index) {
               <tr>
+                <td class="text-center" >{{ $index + 1 }}</td>
                 @if (item.img != "") {
                 <td><img src="{{ serverPath }}/uploads/{{item.img}}" width="100px"></td>
                   } @else {
@@ -43,10 +45,10 @@
                   <td>{{ item.remark}}</td>
                   <td class="text-end">{{ item.price}}</td>
                   <td class="text-center">
-                    <button (click)="edit(item)"  class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#modalFood">
-                        <i class="fa fa-pencil"></i> แก้ไข
+                    <button (click)="edit(item)"  class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#modalFood">
+                        <i class="fa fa-pencil"></i>
                     </button>
-                    <button (click)="remove(item)" class="btn btn-danger"><i class="fa fa-times"></i> ลบ</button>
+                    <button (click)="remove(item)" class="btn btn-danger"><i class="fa fa-times"></i></button>
                   </td>
               </tr>
             }
